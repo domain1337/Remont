@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/bg_gradient"
+    android:padding="16dp">
+
+    <include layout="@layout/toolbar_header" />
+
+    <TextView
+        android:id="@+id/tvTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white_text"
+        android:textSize="18sp"
+        android:gravity="center"
+        android:layout_marginBottom="16dp"/>
+
+
+    <Button
+        android:id="@+id/btnCreateRequest"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Создать заявку на покраску"
+        android:backgroundTint="@color/well"
+        android:textColor="@color/white_text"
+        android:layout_marginBottom="16dp"/>
+    
+    <Button
+        android:id="@+id/btnCreateRepair"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Создать заявку на ремонт"
+        android:backgroundTint="@color/well"
+        android:textColor="@color/white_text"
+        android:layout_marginBottom="16dp"/>
+
+    <Button
+        android:id="@+id/btnStatistics"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Статистика"
+        android:backgroundTint="@color/well"
+        android:textColor="@color/white_text"
+        android:layout_marginBottom="16dp"/>
+
+    <Button
+        android:id="@+id/btnPaint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Покраска"
+        android:backgroundTint="@color/well"
+        android:textColor="@color/white_text"
+        android:layout_marginBottom="16dp"/>
+    <Button
+        android:id="@+id/btnRepair"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Ремонт"
+        android:backgroundTint="@color/well"
+        android:textColor="@color/white_text"
+        android:layout_marginBottom="16dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Заявки на ремонт"
+        android:textColor="@color/white_text"
+        android:textSize="20sp"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="16dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="end"
+        android:layout_marginBottom="8dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="A-Z"
+            android:textColor="@color/well"
+            android:textSize="18sp"
+            android:layout_marginEnd="16dp"/>
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/baseline_calendar_month_24"
+            android:textColor="@color/well"
+            android:backgroundTint="@color/well"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/tableContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:padding="8dp"
+        android:orientation="vertical">
+    </LinearLayout>
+
+</LinearLayout>

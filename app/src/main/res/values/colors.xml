@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="well">#ffc630</color>
+    <color name="purple_500">#673AB7</color>
+    <color name="green_header">#4CAF50</color>
+    <color name="black_background">#000000</color>
+    <color name="white_text">#fafafa</color>
+    <color name="orange_text">#FF9800</color>
+    <color name="green_text">#4CAF50</color>
+    <color name="gray_divider">#444444</color>
+    <color name="blue">#2196F3</color>
+    <color name="red">#F44336</color>
+</resources>
