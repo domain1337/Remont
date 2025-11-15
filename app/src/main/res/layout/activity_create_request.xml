@@ -38,6 +38,7 @@
             android:id="@+id/etPhone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:inputType="phone"
             android:hint="Номер телефона"
             android:textColorHint="@color/well"
             android:textColor="@color/white_text"

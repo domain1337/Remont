@@ -10,4 +10,5 @@
     <color name="gray_divider">#444444</color>
     <color name="blue">#2196F3</color>
     <color name="red">#F44336</color>
+    <color name="gray_button">#E0E0E0</color>
 </resources>

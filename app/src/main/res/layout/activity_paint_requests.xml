@@ -16,11 +16,12 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp" />
+
     <Button
-        android:id="@+id/btnDelete"
+        android:id="@+id/btnDeleteAll"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Удалить"
+        android:text="Удалить все"
         android:backgroundTint="@color/red"
         android:textColor="@color/white_text"
         android:layout_gravity="end"
@@ -76,40 +77,13 @@
             android:background="@color/gray_divider"
             android:layout_marginVertical="4dp"/>
 
-        <!-- Данные (1 строка) -->
+        <!-- Контейнер для строк заявок -->
         <LinearLayout
+            android:id="@+id/layoutPaintRequestsContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="8dp">
-            <TextView
-                android:id="@+id/tvPaintName"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="—"
-                android:textColor="@color/white_text"/>
-            <TextView
-                android:id="@+id/tvPaintDate"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="—"
-                android:textColor="@color/white_text"/>
-            <TextView
-                android:id="@+id/tvPaintColor"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="—"
-                android:textColor="@color/white_text"/>
-            <TextView
-                android:id="@+id/tvPaintStatus"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="—"
-                android:textColor="@color/orange_text"/>
+            android:orientation="vertical">
+            <!-- Сюда будут добавляться строки заявок -->
         </LinearLayout>
 
     </LinearLayout>
