@@ -1,7 +1,6 @@
 package com.example.myapplication;
 
 import android.os.Bundle;
-import android.widget.ImageButton;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import java.text.SimpleDateFormat;
@@ -10,15 +9,15 @@ import java.util.List;
 import java.util.Locale;
 
 public class StatisticsActivity extends AppCompatActivity {
-    private com.example.myapplication.RequestDao requestDao;
+    private RequestDao requestDao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_statistics);
 
-        com.example.myapplication.DatabaseHelper dbHelper = new com.example.myapplication.DatabaseHelper(this);
-        requestDao = new com.example.myapplication.RequestDao(dbHelper);
+        DatabaseHelper dbHelper = new DatabaseHelper(this);
+        requestDao = new RequestDao(dbHelper);
 
         updateDateTime();
         findViewById(R.id.btnBack).setOnClickListener(v -> finish());
@@ -31,16 +30,27 @@ public class StatisticsActivity extends AppCompatActivity {
     }
 
     private void updateStats() {
-        List<String[]> all = requestDao.getAllRequests();
         List<String[]> repair = requestDao.getRequestsByType("repair");
         List<String[]> paint = requestDao.getRequestsByType("paint");
 
         int repairTotal = repair.size();
-        int repairInProgress = (int) repair.stream().filter(r -> "в работе".equals(r[6])).count();
+        int repairInProgress = 0;
+        for (String[] r : repair) {
+            // Статус в ячейке [7]
+            if ("в работе".equals(r[7])) {
+                repairInProgress++;
+            }
+        }
         int repairDone = repairTotal - repairInProgress;
 
         int paintTotal = paint.size();
-        int paintInProgress = (int) paint.stream().filter(r -> "в работе".equals(r[6])).count();
+        int paintInProgress = 0;
+        for (String[] r : paint) {
+            // Статус в ячейке [7]
+            if ("в работе".equals(r[7])) {
+                paintInProgress++;
+            }
+        }
         int paintDone = paintTotal - paintInProgress;
 
         ((TextView) findViewById(R.id.tvRepairTotal)).setText("Общее количество заявок на ремонт: " + repairTotal);

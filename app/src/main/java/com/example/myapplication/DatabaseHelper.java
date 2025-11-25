@@ -5,8 +5,9 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
-    public static final String DATABASE_NAME = "requests.db";
-    public static final int DATABASE_VERSION = 2;
+
+    private static final String DATABASE_NAME = "service.db";
+    private static final int DATABASE_VERSION = 3; // Версия базы данных
 
     public static final String TABLE_REQUESTS = "requests";
     public static final String COLUMN_ID = "id";
@@ -17,8 +18,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String COLUMN_DATE = "date";
     public static final String COLUMN_TYPE = "type";
     public static final String COLUMN_STATUS = "status";
+    public static final String COLUMN_DESCRIPTION = "description"; // Новое поле
 
-    private static final String CREATE_TABLE_REQUESTS =
+    private static final String TABLE_CREATE =
             "CREATE TABLE " + TABLE_REQUESTS + " (" +
                     COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                     COLUMN_NAME + " TEXT, " +
@@ -27,7 +29,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     COLUMN_COLOR + " TEXT, " +
                     COLUMN_DATE + " TEXT, " +
                     COLUMN_TYPE + " TEXT, " +
-                    COLUMN_STATUS + " TEXT);";
+                    COLUMN_STATUS + " TEXT, " +
+                    COLUMN_DESCRIPTION + " TEXT" +
+                    ");";
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -35,7 +39,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL(CREATE_TABLE_REQUESTS);
+        db.execSQL(TABLE_CREATE);
     }
 
     @Override

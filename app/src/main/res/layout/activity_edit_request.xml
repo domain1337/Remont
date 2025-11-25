@@ -1,72 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@drawable/bg_gradient"
     android:padding="16dp">
 
-    <EditText
-        android:id="@+id/etOwnerName"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Имя владельца"
-        android:textColorHint="@color/well"
-        android:textColor="@color/white_text"
-        android:background="@drawable/edittext_rounded"
-        android:padding="12dp"
-        android:layout_marginBottom="16dp"/>
+        android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/etPhone"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Номер телефона"
-        android:textColorHint="@color/well"
-        android:textColor="@color/white_text"
-        android:background="@drawable/edittext_rounded"
-        android:padding="12dp"
-        android:layout_marginBottom="16dp"/>
+        <include layout="@layout/toolbar_header2" />
 
-    <EditText
-        android:id="@+id/etModel"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Модель"
-        android:textColorHint="@color/well"
-        android:textColor="@color/white_text"
-        android:background="@drawable/edittext_rounded"
-        android:padding="12dp"
-        android:layout_marginBottom="16dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Редактирование"
+            android:textColor="@color/white_text"
+            android:textSize="24sp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="24dp"/>
 
-    <EditText
-        android:id="@+id/etColor"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Покраска"
-        android:textColorHint="@color/well"
-        android:textColor="@color/white_text"
-        android:background="@drawable/edittext_rounded"
-        android:padding="12dp"
-        android:layout_marginBottom="16dp"/>
+        <EditText
+            android:id="@+id/etOwnerName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Имя владельца"
+            android:textColor="@color/white_text"
+            android:textColorHint="@color/well"
+            android:background="@drawable/edittext_rounded"
+            android:padding="12dp"
+            android:layout_marginBottom="12dp"/>
 
-    <EditText
-        android:id="@+id/tvSelectedDateTime"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Описание"
-        android:textColorHint="@color/well"
-        android:textColor="@color/white_text"
-        android:background="@drawable/edittext_rounded"
-        android:padding="12dp"
-        android:layout_marginBottom="16dp"/>
+        <EditText
+            android:id="@+id/etPhone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Телефон"
+            android:textColor="@color/white_text"
+            android:textColorHint="@color/well"
+            android:background="@drawable/edittext_rounded"
+            android:padding="12dp"
+            android:layout_marginBottom="12dp"/>
 
-    <Button
-        android:id="@+id/btnSave"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Сохранить изменения"
-        android:backgroundTint="@color/well"
-        android:textColor="@color/white_text"/>
+        <EditText
+            android:id="@+id/etModel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Модель"
+            android:textColor="@color/white_text"
+            android:textColorHint="@color/well"
+            android:background="@drawable/edittext_rounded"
+            android:padding="12dp"
+            android:layout_marginBottom="12dp"/>
 
-</LinearLayout>
+        <EditText
+            android:id="@+id/etColor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Цвет (если покраска)"
+            android:textColor="@color/white_text"
+            android:textColorHint="@color/well"
+            android:background="@drawable/edittext_rounded"
+            android:padding="12dp"
+            android:layout_marginBottom="12dp"/>
+
+        <!-- Поле описания проблемы -->
+        <EditText
+            android:id="@+id/etProblemDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Описание проблемы (если ремонт)"
+            android:textColor="@color/white_text"
+            android:textColorHint="@color/well"
+            android:background="@drawable/edittext_rounded"
+            android:padding="12dp"
+            android:inputType="textMultiLine"
+            android:minLines="3"
+            android:gravity="top|start"
+            android:layout_marginBottom="12dp"/>
+
+        <!-- ВОТ ЭТОЙ КНОПКИ НЕ ХВАТАЛО -->
+        <Button
+            android:id="@+id/btnPickDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Изменить дату"
+            android:backgroundTint="@color/well"
+            android:textColor="@color/white_text"
+            android:layout_marginBottom="20dp"/>
+
+        <Button
+            android:id="@+id/btnSave"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Сохранить изменения"
+            android:backgroundTint="@color/well"
+            android:textColor="@color/white_text"/>
+
+    </LinearLayout>
+</ScrollView>

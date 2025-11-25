@@ -1,6 +1,5 @@
 package com.example.myapplication;
 
-import java.util.Date;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
@@ -14,6 +13,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 
 public class CreateRequestActivity extends AppCompatActivity {
@@ -38,20 +38,16 @@ public class CreateRequestActivity extends AppCompatActivity {
         DatabaseHelper dbHelper = new DatabaseHelper(this);
         requestDao = new RequestDao(dbHelper);
 
-        // Валидация номера телефона
+        // Валидация
         etPhone.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 String input = s.toString();
-
                 if (input.startsWith("+")) {
-                    // Проверяем, что после + только цифры
                     String digits = input.substring(1);
                     if (!digits.matches("\\d*")) {
-                        // Удаляем недопустимые символы
                         String cleaned = digits.replaceAll("[^\\d]", "");
                         etPhone.removeTextChangedListener(this);
                         etPhone.setText("+" + cleaned);
@@ -59,15 +55,12 @@ public class CreateRequestActivity extends AppCompatActivity {
                         etPhone.addTextChangedListener(this);
                     }
                 } else if (!input.isEmpty() && !input.matches("\\d*")) {
-                    // Если строка не начинается с + и содержит буквы
                     String cleaned = input.replaceAll("[^\\d]", "");
                     etPhone.removeTextChangedListener(this);
                     etPhone.setText(cleaned);
                     etPhone.setSelection(etPhone.getText().length());
                     etPhone.addTextChangedListener(this);
                 }
-
-                // Ограничение длины до 12 символов
                 if (input.length() > 12) {
                     etPhone.removeTextChangedListener(this);
                     etPhone.setText(input.substring(0, 12));
@@ -75,7 +68,6 @@ public class CreateRequestActivity extends AppCompatActivity {
                     etPhone.addTextChangedListener(this);
                 }
             }
-
             @Override
             public void afterTextChanged(Editable s) {}
         });
@@ -98,18 +90,17 @@ public class CreateRequestActivity extends AppCompatActivity {
                 return;
             }
 
-            // Проверка формата телефона
             if (!phone.matches("\\+\\d{11}") && !phone.matches("\\d{11}")) {
                 Toast.makeText(this, "Неверный формат номера телефона", Toast.LENGTH_SHORT).show();
                 return;
             }
 
-            // Если телефон без +, добавляем его
             if (!phone.startsWith("+")) {
                 phone = "+" + phone;
             }
 
-            long id = requestDao.addRequest(name, phone, model, color, selectedDateTime, "paint");
+            // ПЕРЕДАЕМ ПУСТУЮ СТРОКУ "" ВМЕСТО ОПИСАНИЯ ПРОБЛЕМЫ
+            long id = requestDao.addRequest(name, phone, model, color, selectedDateTime, "paint", "");
 
             if (id != -1) {
                 Toast.makeText(this, "Заявка на покраску оформлена!", Toast.LENGTH_SHORT).show();
@@ -122,7 +113,6 @@ public class CreateRequestActivity extends AppCompatActivity {
 
     private void showDateTimePicker() {
         Calendar now = Calendar.getInstance();
-
         DatePickerDialog datePickerDialog = new DatePickerDialog(
                 this,
                 (view, year, month, dayOfMonth) -> {
@@ -131,7 +121,6 @@ public class CreateRequestActivity extends AppCompatActivity {
                     selectedDate.set(Calendar.MONTH, month);
                     selectedDate.set(Calendar.DAY_OF_MONTH, dayOfMonth);
 
-                    // Проверка: если сегодня — ограничить время
                     if (selectedDate.get(Calendar.YEAR) == now.get(Calendar.YEAR) &&
                             selectedDate.get(Calendar.MONTH) == now.get(Calendar.MONTH) &&
                             selectedDate.get(Calendar.DAY_OF_MONTH) == now.get(Calendar.DAY_OF_MONTH)) {
@@ -147,41 +136,30 @@ public class CreateRequestActivity extends AppCompatActivity {
                                         Toast.makeText(this, "Нельзя выбрать прошлое время", Toast.LENGTH_SHORT).show();
                                         return;
                                     }
-
                                     selectedDateTime = new SimpleDateFormat("dd.MM.yyyy HH:mm", Locale.getDefault())
                                             .format(selectedDate.getTime());
                                     btnSelectDate.setText("Выбрано: " + selectedDateTime);
                                 },
-                                now.get(Calendar.HOUR_OF_DAY),
-                                now.get(Calendar.MINUTE),
-                                true
+                                now.get(Calendar.HOUR_OF_DAY), now.get(Calendar.MINUTE), true
                         );
                         timePickerDialog.show();
-
                     } else {
-                        // Если дата в будущем — любое время
                         TimePickerDialog timePickerDialog = new TimePickerDialog(
                                 this,
                                 (timeView, hourOfDay, minute) -> {
                                     selectedDate.set(Calendar.HOUR_OF_DAY, hourOfDay);
                                     selectedDate.set(Calendar.MINUTE, minute);
                                     selectedDate.set(Calendar.SECOND, 0);
-
                                     selectedDateTime = new SimpleDateFormat("dd.MM.yyyy HH:mm", Locale.getDefault())
                                             .format(selectedDate.getTime());
                                     btnSelectDate.setText("Выбрано: " + selectedDateTime);
-                                },
-                                0, 0, true
+                                }, 0, 0, true
                         );
                         timePickerDialog.show();
                     }
                 },
-                now.get(Calendar.YEAR),
-                now.get(Calendar.MONTH),
-                now.get(Calendar.DAY_OF_MONTH)
+                now.get(Calendar.YEAR), now.get(Calendar.MONTH), now.get(Calendar.DAY_OF_MONTH)
         );
-
-        // Установка минимальной даты (сегодня)
         datePickerDialog.getDatePicker().setMinDate(now.getTimeInMillis());
         datePickerDialog.show();
     }
